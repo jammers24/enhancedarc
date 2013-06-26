@@ -1,0 +1,103 @@
+-- Database Creation
+CREATE DATABASE d;
+USE d;
+-- Table Script Creation
+CREATE TABLE barangay(
+   barangay_id Int
+   ,   name text
+   ,   baragay_type serial
+   ,   municipality text
+   ,   congressional_district text
+   ,   province text
+   ,   region text
+   ,   total_land_area Float
+   ,   total_agricultural_land Float
+   ,   barangay_population_id Int
+   ,   name_barangay_chairman text
+   ,   name_barc_chairman text
+   ,   barc_functional serial
+   ,   barc_remarks text
+   ,   terrain serial
+   ,   ecosystem serial
+   ,   distance_from_townproper Float
+   ,   means_transportation_id Int
+   ,   barangay_profiled serial
+   ,   barangay_remarks text
+   ,   num_arb_profiled_male Float
+   ,   num_arb_profiled_female Float
+   ,   num_arb_profiled_remarks Float
+   ,PRIMARY KEY (barangay_id)
+) TYPE = INNODB;
+
+CREATE TABLE arb(
+   arb_id Int
+   ,   arb_male Float
+   ,   arb_female Float
+   ,   non_arb_male Float
+   ,   non_arb_female Float
+   ,PRIMARY KEY (arb_id)
+) TYPE = INNODB;
+
+CREATE TABLE transportation(
+   transportation_id Int
+   ,   name text
+   ,PRIMARY KEY (transportation_id)
+) TYPE = INNODB;
+
+CREATE TABLE lti(
+   lti_id Int
+   ,   lad_scope Float
+   ,   working_scope Float
+   ,   lad_accomplishment_id Int
+   ,   lad_remarks_id Int
+   ,   lad_arb_male Float
+   ,   lad_arb_female Float
+   ,   leasehold_scope Float
+   ,   leasehold_accomplishment Float
+   ,   leasehold_remarks_id Int
+   ,   lh_arb_male Float
+   ,   lh_arb_female Float
+   ,PRIMARY KEY (lti_id)
+) TYPE = INNODB;
+
+CREATE TABLE lad_accomplishment(
+   lad_accomplishment_id Int
+   ,   lad_name text
+   ,   lad_area Float
+   ,PRIMARY KEY (lad_accomplishment_id)
+) TYPE = INNODB;
+
+CREATE TABLE leasehold_remarks(
+   leasehold_remarks_id Int
+   ,   name text
+   ,PRIMARY KEY (leasehold_remarks_id)
+) TYPE = INNODB;
+
+CREATE TABLE trainings(
+   training_id Int
+   ,   title text
+   ,   source_fund text
+   ,   amount Float
+   ,   conducted_by text
+   ,   conducted_date DateTime
+   ,   participant_id Int
+   ,PRIMARY KEY (training_id)
+) TYPE = INNODB;
+
+CREATE TABLE participant(
+   training_id Int
+   ,   participant_address Int
+   ,   arb_male Float
+   ,   arb_female Float
+   ,   non_arb_male Float
+   ,   non_arb_female Float
+   ,   tot_male Bool
+   ,   tot_female Bool
+   ,PRIMARY KEY ()
+) TYPE = INNODB;
+-- Relationships Creation
+ALTER TABLE arb ADD  CONSTRAINT barangay_arb_CON FOREIGN KEY(arb_id) REFERENCES barangay (barangay_population_id);
+ALTER TABLE transportation ADD  CONSTRAINT barangay_transportation_CON FOREIGN KEY(transportation_id) REFERENCES barangay (means_transportation_id);
+ALTER TABLE lad_accomplishment ADD  CONSTRAINT lti_lad_accomplishment_CON FOREIGN KEY(lad_accomplishment_id) REFERENCES lti (lad_accomplishment_id);
+ALTER TABLE leasehold_remarks ADD  CONSTRAINT lti_leasehold_remarks_CON FOREIGN KEY(leasehold_remarks_id) REFERENCES lti (leasehold_remarks_id);
+ALTER TABLE participant ADD  CONSTRAINT trainings_participant_CON FOREIGN KEY(training_id) REFERENCES trainings (training_id);

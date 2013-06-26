@@ -1,0 +1,33 @@
+How to install the System
+
+	1) download git, and wamp 
+
+		git - http://git-scm.com/downloads
+			* click the download for windows
+		wamp- http://www.wampserver.com/en/
+			*click download and click any of available installer
+
+		Then install the git and wamp. just click next. . . then finish
+
+	2) sign up on git
+		- https://github.com/signup/free, sign up here
+		- confirm your email sent by github
+		- log in your account
+
+	3) got to this url
+		url - https://github.com/juntals01/enhancedarc
+
+	4) click the copy clipboard
+		note: copy clipboard is a small icon on the right side of input-box ( Git Read-Only | https://github.com/juntals01/enhancedarc.git )
+	
+	5) open git bash installed on your computer
+		
+		- type "cd c:/wamp/www/"
+		- type "git clone and paste the copied clipboard"  (see no. 4)
+	
+	To download latest revision of the project
+		
+		1) open git bash
+		2) - type "cd cd c:/wamp/www/enhancedarc"
+		   - type "git fetch"
+		   - type "merge origin/master"
